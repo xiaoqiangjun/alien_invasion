@@ -13,21 +13,22 @@ def run_game():
         (ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("alien invasion")
 
-    # 创建一艘飞船
+    # 创建一艘飞船、创建外星人编组、创建子弹编组
     ship = Ship(ai_settings, screen)
-    # 创建子弹编组
+    aliens = Group()
     bullets = Group()
+
+    # 创建外星人群
+    gf.create_fleet(ai_settings, screen, ship, aliens)
 
     # 游戏主循环
     while True:
 
-        # 监听键盘和鼠标事件
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
-        bullets.update()
+        gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
+        gf.update_aliens(ai_settings, ship, aliens)
+        gf.update_screen(ai_settings, screen, ship, aliens, bullets)
 
-        # 绘制与显示绘制
-        gf.update_screen(ai_settings, screen, ship, bullets)
-
-
-run_game()
+if __name__ == "__main__":
+    run_game()
