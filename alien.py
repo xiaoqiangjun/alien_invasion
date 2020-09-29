@@ -1,9 +1,9 @@
 import pygame
 from pygame.sprite import Sprite
 
+
 class Alien(Sprite):
     """表示外星人的类"""
-
     def __init__(self, ai_settings, screen):
         """初始化外星人设置位置"""
         super().__init__()
@@ -28,7 +28,6 @@ class Alien(Sprite):
             return True
         elif self.rect.left <= 0:
             return True
-        
 
     def update(self):
         """向右或向右移动"""

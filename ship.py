@@ -1,9 +1,10 @@
 import pygame
+from pygame.sprite import Sprite
 
-
-class Ship():
+class Ship(Sprite):
     def __init__(self, ai_settings, screen):
         """初始化飞船并设置初始位置"""
+        super().__init__()
         self.screen = screen
         self.ai_settings = ai_settings
 
@@ -33,6 +34,10 @@ class Ship():
 
         # 导回centerx
         self.rect.centerx = self.center
+
+    def center_ship(self):
+        """居中飞船"""
+        self.center = self.screen_rect.centerx
 
     def blitme(self):
         """在指定位置绘制飞船"""
