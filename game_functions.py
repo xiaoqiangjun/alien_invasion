@@ -1,5 +1,6 @@
 import sys
 from time import sleep
+import json
 
 import pygame
 from bullet import Bullet
@@ -109,10 +110,22 @@ def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
 
     Check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets)
 
+def change_record_high_score(stats):
+    """获取记录在文件中的最高分"""
+    data = {}
+    with open("record_score.json", 'r') as fr:
+        data = json.load(fr)
+        fr.close()
+    with open("record_score.json", 'w') as fw:
+        data["high_score"] = stats.high_score
+        json.dump(data, fw)
+        fw.close()
+
 def check_high_score(stats, sb):
     """检测最高分"""
     if stats.score > stats.high_score:
         stats.high_score = stats.score
+        change_record_high_score(stats)
         sb.prep_high_score()
 
 def Check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, bullets):

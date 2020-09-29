@@ -2,6 +2,9 @@ class Settings():
     """储存所有设置的类"""
     def __init__(self):
         """初始化静态游戏设置"""
+        # 记录最高分文件
+        self.record_path = "record_score.json"
+        self.data = {"high_score": 520, "author": "xiao"}
         # 屏幕设置
         self.screen_width = 1200
         self.screen_height = 800
